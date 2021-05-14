@@ -58,12 +58,11 @@ namespace WebApi2.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("api/my-profile/update-my-profile/{id}")]
-
-        public HttpResponseMessage UpdateMyProfile(MyProfileModel data, int id)
+        [HttpPost]
+        [Route("api/my-profile/update-my-profile/")]
+        public HttpResponseMessage UpdateEmployee([FromBody] MyProfileModel data)
         {
-            if (function.UpdateMyProfile(data, id))
+            if (function.UpdateMyProfile(data))
             {
                 return Request.CreateResponse(HttpStatusCode.OK, data);
             }
