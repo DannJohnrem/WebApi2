@@ -21,6 +21,7 @@ namespace WebApi2.Functions
                     DynamicParameters param = new DynamicParameters();
                     param.Add("@first_name", data.first_name);
                     param.Add("@last_name", data.last_name);
+                    param.Add("@gender_id", data.gender_id);
                     conn.Execute("SPInsertMyProfile", param, commandType: CommandType.StoredProcedure);
 
                     return true;
@@ -68,14 +69,16 @@ namespace WebApi2.Functions
                 return false;
             }
         }
-        public bool UpdateMyProfile(MyProfileModel data, int id)
+
+    
+        public bool UpdateMyProfile(MyProfileModel data)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(DBHelper.ConnectionString()))
                 {
                     DynamicParameters param = new DynamicParameters();
-                    param.Add("@id", id);
+                    param.Add("@id", data.id);
                     param.Add("@first_name", data.first_name);
                     param.Add("@last_name", data.last_name);
                     conn.Execute("SPUpdateMyProfile", param, commandType: CommandType.StoredProcedure);
